@@ -1,0 +1,131 @@
+<style type="text/css">
+  .reflist {
+      padding-left: 1em;
+}
+
+  .reflist li {
+      margin-top: 3px;
+}
+
+  .reflist a:hover + div {
+      display: block;
+}
+  .ref-desc {
+      display: none;
+      margin-top: 7px;
+}
+</style>
+
+<script type="text/javascript">
+$(function() {
+   $("ul.reflist li a").each(function() {
+      $(this).attr("target", "_blank");
+      $(this).attr("onClick", "recordOutboundLink(this, 'Outbound Links', '" + this + "');return false;");
+   });
+});
+</script>
+
+<ul class="reflist">
+	<li><a href="http://www.scala-lang.org">Oficjalna strona języka Scala</a></li>
+
+	<li><a href="http://www.scala-lang.org/docu/files/ScalaReference.pdf">Specyfikacja języka Scala</a></li>
+
+	<li>
+		<a href="http://www.typesafe.com">Typesafe</a>
+		<div class="ref-desc">Firma będąca twórcą "stosu" składającego się z kompilatora i bibliotek Scali, platformy Akka oraz
+		frameworka do tworzenia aplikacji internetowych Play!. Współtwórcą firmy jest Martin Odersky - twórca i czołowy promotor
+		języka Scala. Na stronie firmy można pobrać darmową książkę "Scala for impatient"</div>
+	</li>
+
+	<li>
+	  <a href="http://www.playframework.org/">Play! Framework</a>
+	  <div class="ref-desc">
+		Framework do tworzenia aplikacji internetowych zorientowany na dużą produktywność.<br />
+		W wersji stabilnej (1.2.x) podstawowym językiem jest Java, natomiast Scala występuje jako moduł dodatkowy.
+		W wersji rozwojowej (2.0+) Scala jest językiem podstawowym do tego stopnia, że przepisano całość frameworka
+		  na ten właśnie język.
+	  </div>
+	</li>
+
+	<li>
+	  <a href="http://akka.io/">Akka</a>
+	  <div class="ref-desc">
+		Platforma do rozwoju skalowalnych, odpornych na błędy, sieciowych aplikacji współbieżnych.
+	  </div>
+	</li>
+	<li>
+		<a href="http://blog.zabiello.com/2009/03/28/scala-lang">Scala - język przyszłości</a>
+		<div class="ref-desc">Blog Jarosława Zabiełły </div>
+	</li>
+
+	<li>
+		<a href="http://oldfashionedsoftware.com/2008/09/27/tail-recursion-basics-in-scala/">Tail-Recursion Basics In Scala</a>
+		<div class="ref-desc">
+			Matt Malone’s Old-Fashioned Software Development Blog
+		</div>
+	</li>
+
+	<li>
+		<a href="http://ofps.oreilly.com/titles/9780596155957/">Programming Scala</a>
+		<div class="ref-desc">
+			Książka Deana Wamplera i Alexa Payne'a, udostępniona on-line na stronie wydawnictwa O'Reilly.
+		</div>
+	</li>
+
+	<li>
+		<a href="http://matt.might.net/articles/learning-scala-in-small-bites/">Learning Scala in small bites</a>
+		<div class="ref-desc">
+			Zestaw przykładów pomyślany jako szybkie wprowadzenie do języka Scala.
+		</div>
+	</li>
+
+	<li>
+		<a href="http://twitter.github.com/scala_school/">Scala school</a>
+		<div class="ref-desc">
+			Nieukończony jeszcze podręcznik dla doświadczonych inżynierów, pomyślany jako szybkie wprowadzenie do języka.<br />
+			Twitter Open source na GitHub
+		</div>
+	</li>
+
+	<li>
+		<a href="http://twitter.github.com/effectivescala/">Effective Scala</a>
+		<div class="ref-desc">
+			Zestaw dobrych praktyk zebrany na podstawie doświadczeń twórców Twittera. <br />
+			Twitter Open source na GitHub
+		</div>
+	</li>
+	<li>
+		<a href="http://blog.wsoczynski.pl/cykle/">Cykle</a>
+		<div class="ref-desc">
+			Blog Wojciecha Soczyńskiego, być może pierwszego autora polskiej książki o Scali...
+		</div>
+	</li>
+
+	<li>
+		<a href="http://www.slideshare.net/El_Picador/scala-vs-ruby">Scala vs. Ruby</a>
+		<div class="ref-desc">
+			Nieco tendencyjny (w stronę Ruby'ego), niemniej ciekawy, pokaz slajdów. Każdy, kto ma swój rozum, wyciągnie właściwe wnioski.
+		</div>
+	</li>
+
+	<li>
+		<a href="http://www.ibm.com/developerworks/views/java/libraryview.jsp?search_by=scala+neward">The busy Java developer's guide to Scala</a>
+		<div class="ref-desc">
+			IBM Technical Library on Scala - Ted Neward series
+		</div>
+	</li>
+
+	<li>
+		<a href="http://www.codecommit.com/blog/scala/scala-for-java-refugees-part-1">Scala for Java Refugees Part 1: main(String[])</a>
+		<div class="ref-desc">
+			Blog Daniela Spiewaka (który mimo wszystko chyba ma tylko polskie korzenie)
+		</div>
+	</li>
+
+	<li>
+		<a href="http://www.simplyscala.com/">Simply Scala</a>
+		<div class="ref-desc">
+			Interaktywny kurs Scali dla początkujących
+		</div>
+	</li>
+</ul>
