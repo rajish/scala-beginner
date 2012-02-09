@@ -1,8 +1,140 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+      <meta content='width=1100' name='viewport'/>
+ 
+<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js' type='text/javascript'></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js' type='text/javascript'></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/lang-scala.js' type='text/javascript'></script>
 
+<style type="text/css" media="screen">
+body {
+  font: Arial;
+  color: white;
+  background: black;
+}
+
+
+/* Pretty printing styles. Used with prettify.js. */
+
+/* SPAN elements with the classes below are added by prettyprint. */
+.pln { color: #EEE }  /* plain text */
+
+@media screen {
+  .str { color: #BADA55 }  /* string content */
+  .kwd { color: #93C763 }  /* a keyword */
+  .com { color: #66747B }  /* a comment */
+  .typ { color: #678CB1 }  /* a type name */
+  .lit { color: #FACD22 }  /* a literal value */
+  /* punctuation, lisp open bracket, lisp close bracket */
+  .pun, .opn, .clo, .pln { color: #F1F2F3 }
+  .tag { color: #8AC763 }  /* a markup tag name */
+  .atn { color: #E0E2E4 }  /* a markup attribute name */
+  .atv { color: #EC7600 }  /* a markup attribute value */
+  .dec, .var { color: purple }  /* a declaration; a variable name */
+  .fun { color: red }  /* a function name */
+}
+
+/* Use higher contrast and text-weight for printable form. */
+@media print, projection {
+  .str { color: #060 }
+  .kwd { color: #006; font-weight: bold }
+  .com { color: #600; font-style: italic }
+  .typ { color: #404; font-weight: bold }
+  .lit { color: #044 }
+  .pun, .opn, .clo { color: #440 }
+  .tag { color: #006; font-weight: bold }
+  .atn { color: #404 }
+  .atv { color: #060 }
+}
+
+/* Put a border around prettyprinted code snippets. */
+pre.prettyprint { 
+   padding: 2px;
+   border: 1px solid #888;
+   border-radius: 5px;
+   overflow: auto;
+   position: relative;
+}
+pre[rel] {
+    padding-top: 10;
+}
+
+pre[rel]:before {
+    content: attr(rel);
+    position: absolute;
+    top: 3;
+    right: 7;
+    border-left: 1px solid #666;
+    border-bottom: 1px solid #666;
+    padding-left: 3;
+    padding-right: 2;
+    border-bottom-left-radius: 3;
+}
+
+/* Specify class=linenums on a pre to get line numbering */
+ol.linenums { margin-top: 0; margin-bottom: 0 } /* IE indents via margin-left */
+li.L0,
+li.L1,
+li.L2,
+li.L3,
+li.L5,
+li.L6,
+li.L7,
+li.L8 { color: #555; }
+/* Alternate shading for lines */
+li.L1,
+li.L3,
+li.L5,
+li.L7,
+li.L9 { background: #222 }
+
+</style>
+
+<script type='text/javascript'>
+      function styleCode()
+      {
+          if (typeof disableStyleCode != "undefined") 
+          {
+              return;
+          }
+          var a = false;
+          $("pre").each(function()
+          {
+              if (!$(this).hasClass("prettyprint"))
+              {
+                  var relAttr = $(this).attr("rel");
+                  var lang = "";
+                  if(typeof relAttr != "undefined")
+                      lang = "lang-" + relAttr.toLowerCase();
+                  $(this).addClass("prettyprint linenums " + lang);
+                  a = true
+              }
+          });
+          $("code").each(function()
+          {
+              if (!$(this).hasClass("prettyprint"))
+              {
+                  var relAttr = $(this).attr("rel");
+                  var lang = "";
+                  if(typeof relAttr != "undefined")
+                      lang = "lang-" + relAttr.toLowerCase();
+                  $(this).addClass("prettyprint " + lang);
+                  a = true
+              }
+          });
+          if (a) { prettyPrint() } 
+      }
+
+</script>
+</head>
+<body onload="styleCode()">
 <!--more-->
-Język Scala posiada możliwość zdefiniowania samodzielnych funkcji, tak jak to ma miejsce w C++, a niemożliwe jest w Javie, gdzie musimy posiłkować się metodami statycznymi.
+<p>Język Scala posiada możliwość zdefiniowania samodzielnych funkcji, tak jak to ma miejsce w C++, a niemożliwe jest w Javie, gdzie musimy posiłkować się metodami statycznymi.
 
-Jest wiele sposobów na zdefiniowanie funkcji lub vartości funkcjopodobnych. <br />
+Jest wiele sposobów na zdefiniowanie funkcji lub wartości funkcjopodobnych. <br />
+</p>
+<pre rel="Scala">
 // Implicit function:
 def id(x : Int) : Int = x
 
@@ -13,6 +145,7 @@ val anonId = (x : Int) => x
 object Id {
   def apply(x : Int) = x
 }
+  </pre>
 
 // f(x) => f.apply(x)
 
@@ -26,7 +159,6 @@ val myId = new Identity
 val myOtherId = new {
   def apply(x : Int) = x
 }
-
 
 println(id(3))
 // Prints:
@@ -118,3 +250,5 @@ println(lc.x)
 
 
 <h3>Metoda <code>apply</code></h3>
+  </body>
+</html>
