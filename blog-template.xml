@@ -1041,11 +1041,31 @@ margin-top: 10px;
 }
 
 /* Put a border around prettyprinted code snippets. */
-pre.prettyprint { 
+pre {
+   overflow: auto;
+   position: relative;
+}
+
+pre.prettyprint {
    padding: 2px;
    border: 1px solid #888;
    border-radius: 5px;
-   //overflow: scroll;
+}
+
+pre[rel] {
+    padding-top: 10px;
+}
+
+pre[rel]:before {
+    content: attr(rel);
+    position: absolute;
+    top: 3px;
+    right: 7px;
+    border-left: 1px solid #666;
+    border-bottom: 1px solid #666;
+    padding-left: 3px;
+    padding-right: 2px;
+    border-bottom-left-radius: 3px;
 }
 
 /* Specify class=linenums on a pre to get line numbering */
@@ -1067,7 +1087,7 @@ li.L9 { background: #222 }
 
 </style>
 
-<script type='text/javascript'>
+<script type="text/javascript">
       function styleCode()
         {
           if (typeof disableStyleCode != "undefined") 
@@ -1077,9 +1097,13 @@ li.L9 { background: #222 }
           var a = false;
           $("pre").each(function()
           {
-              if (!$(this).hasClass(prettyprint))
+              if (!$(this).hasClass("prettyprint"))
               {
-                  $(this).addClass(prettyprint lang-scala linenums");
+                  var relAttr = $(this).attr("rel");
+                  var lang = "";
+                  if(typeof relAttr != "undefined")
+                      lang = "lang-" + relAttr.toLowerCase();
+                  $(this).addClass("prettyprint linenums " + lang);
                   a = true
               }
           });
@@ -1087,11 +1111,15 @@ li.L9 { background: #222 }
           {
               if (!$(this).hasClass("prettyprint"))
               {
-                  $(this).addClass("prettyprint lang-scala");
+                  var relAttr = $(this).attr("rel");
+                  var lang = "";
+                  if(typeof relAttr != "undefined")
+                      lang = "lang-" + relAttr.toLowerCase();
+                  $(this).addClass("prettyprint " + lang);
                   a = true
               }
           });
-          if (a) { prettyPrint() } 
+          if (a) { prettyPrint() }
       }
 
 function recordOutboundLink(link, category, action) {
