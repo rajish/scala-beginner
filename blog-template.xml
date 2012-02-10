@@ -1103,6 +1103,8 @@ li.L9 { background: #222 }
                   var lang = "";
                   if(typeof relAttr != "undefined")
                       lang = "lang-" + relAttr.toLowerCase();
+                  else
+                      lang = "lang-scala";
                   $(this).addClass("prettyprint linenums " + lang);
                   a = true
               }
@@ -1115,6 +1117,8 @@ li.L9 { background: #222 }
                   var lang = "";
                   if(typeof relAttr != "undefined")
                       lang = "lang-" + relAttr.toLowerCase();
+                  else
+                      lang = "lang-scala";
                   $(this).addClass("prettyprint " + lang);
                   a = true
               }
