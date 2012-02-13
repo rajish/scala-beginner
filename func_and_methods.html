@@ -1,28 +1,55 @@
 <p>Język Scala posiada możliwość zdefiniowania samodzielnych funkcji, tak jak to ma miejsce w C++, a niemożliwe jest w Javie, gdzie musimy posiłkować się metodami statycznymi.
 
-Jest wiele sposobów na zdefiniowanie funkcji lub wartości funkcjopodobnych. <br />
-</p>
 <!--more-->
-
+Jest wiele sposobów na zdefiniowanie funkcji lub wartości funkcjopodobnych. Poniższe przykłady zaczerpnięte zostały zaczerpnięte
+ze strony <a href="http://matt.might.net/articles/learning-scala-in-small-bites/">Matta Mighta</a>. Przyjrzyjmy się im.
+</p>
+<p>
 Funkcja wywiedziona (ang. <em>implicit</em>):
 <pre rel="Scala">
 def id(x : Int) : Int = x
-
 println(id(3))
 // Wypisuje:
 // 3
 </pre>
+Do jej deklaracji używa się słowa kluczowego <code>def</code>. Za znakiem '<code>=</code>' może znajdować jednoliniowa
+ lub, ujęta w nawiasy klamrowe <code>{}</code>, wieloliniowa definicja:
+<pre rel="Scala">
+def plus1(x : Int) : Int = {
+  x + 1
+}
+println(plus1(2))
+// Wypisue:
+// 3
+</pre>
+Funkcje bezparametrowe można wywoływać z pominięciem nawiasów okrągłych:
+<pre ref="Scala">
+def three() = 1 + 2
+println(three())
+println(three)
+// Oba wywołania wypisują:
+// 3
+// 3
+</pre>
+Dodatkowo w powyższym przykładzie widać, że nie jest potrzebne jawne deklarowanie zwracanego typu, ponieważ kompilator
+sam się go "domyśli".
+Oczywiście pamiętamy, że jawne użycie słowa kluczowego <code>return</code> też nie jest konieczne, bo zwracana jest zawsze
+wartość ostatniego wyrażenia w funkcji.
+</p>
 
+<p>
 Funckja anonimowa:
 <pre rel="Scala">
 val anonId = (x : Int) => x
-
 println(anonId(3))
 // Wypisuje:
 // 3
 </pre>
+W powyższym przykładzie wartość <code>anonId</code> posiada wywiedziony typ funkcyjny <code>(Int) => Int = &lt;function1&gt;</code>.
+</p>
 
-Obiekt lub klasa z metodą <code>apply</code>
+<p>
+Obiekt lub klasa z metodą <code>apply</code> mogą udawać funkcje:
 <pre rel="Scala">
 object Id {
   def apply(x : Int) = x
@@ -34,6 +61,7 @@ println(Id.apply(3))
 println(Id(3))
 // Wypisują:
 // 3
+// 3
 
 class Identity {
   def apply(x : Int) = x
@@ -43,6 +71,7 @@ println(myId.apply(3))
 println(myId(3))
 // Wypisują:
 // 3
+// 3
 
 // anonimowa klasa z metodą apply:
 val myOtherId = new {
@@ -51,15 +80,26 @@ val myOtherId = new {
 println(myOtherId(3))
 // Wypisuje:
 // 3
-
 </pre>
+Właściwie w specyfikacji języka Scala jest to zdefiniowane na odwrót: to funkcje są skrótem myślowym
+dla obiektów ze zdefiniowaną metodą <code>apply</code>. Przykładowa obiektowa definicja funkcji może
+wyglądać tak:
+<pre rel="Scala">
+object funId {
+  def apply(x : Int) = x
+  override def toString() = "&lt;function&gt;"
+}
+</pre>
+</p>
 
 
-Funkcje wieloargumentowe:
+<p>Funkcje wieloargumentowe:
 <pre rel="Scala">
 def h(x : Int, y : Int) : Int = x + y
-
-// Funkcja rozwijana (ang. Curried)
+</pre>
+Cóż... prosta sprawa: argumenty oddziela się przecinkami - tak samo jak w Javie czy C++. Ale Scala
+ma w zanadrzu <a href="http://pl.wikipedia.org/wiki/Currying">funkcje rozwijane (ang. <em>Curried</em>)</a>
+<pre rel="Scala">
 def hC (x : Int) (y : Int) : Int = x + y
 
 // źle: hC 3 4
@@ -78,8 +118,31 @@ println(plus3(10))
 // Wypisuje:
 // 13
 </pre>
+Wywołanie funkcji z jawnie podanymi niektórymi parametrami, a ich resztą zastąpioną znakiem '<code>_</code>' (lub ich pominięciem w przypadku Curried),
+zwraca nową funkcję z pomniejszoną listą parametrów. Jej kod zmienia się w stosunku do pierwowzoru o tyle, że w jej wnętrzu
+parametry podane jawnie zostają zastąpione ich wartościami podanymi w wywołaniu. Powyżej widać przykłady prawidłowego użycia takiej funkcji oraz
+możliwe złe wywołania.<br />
+Funkcje rozwijane mają tę cechę, że kolejne zestawy parametrów mogą być aplikowane etapami. Dzięki temu możliwe są złożone konstrukcje
+tworzące nowe <a href="http://pl.wikipedia.org/wiki/J%C4%99zyk_dziedzinowy">języki domenowe (ang. <em>Domain Specific Language</em>, DSL)</a>
+<pre rel="Scala">
+ def whileLoop(cond: => Boolean)(body: => Unit): Unit =
+  if (cond) {
+      body
+      whileLoop(cond)(body)
+  }
+  var i = 10
+  whileLoop (i > 0) {
+    println(i)
+    i -= 1
+  }
+</pre>
+Funkcja <code>whileLoop</code> posiada dwa argumenty: <code>cond</code> i <code>body</code>. W momencie zastosowania tej funkcji
+właściwe parametry nie są obliczane aż do momentu ich użycia w ciele pętli (linie 8 i 9). Dzięki temu powstaje podobna do javowej pętla <code>while</code>
+ z rekurencyją implementacją.
+</p>
 
-Procedura (funkcja zwracjąca domyślnie zmienną typu <code>Unit</code>):
+<p>
+Procedura to funkcja zwracjąca domyślnie wartość typu <code>Unit</code>, który jest odpowiednikiem <code>void</code> w Javie i C++:
 <pre rel="Scala">
 def proc(a : Int) {
   println("Jestem procedurą!")
@@ -89,7 +152,9 @@ proc(10)
 // Wypisuje:
 // Jestem procedurą!
 </pre>
-
+Warto zapamiętać, że skrótowym zapisem wartości typu <code>Unit</code> jest <code>()</code>.
+  </p>
+<p>
 Funkcja bezargumentowa:
 <pre rel="Scala">
 def argless : Unit = println("zawołano bezargumentową")
