@@ -1,0 +1,25 @@
+@(dinos: List[Dino], dinoForm: Form[String])
+
+import helper._
+
+@main("The great dinosaurs database") {
+
+  <h1>@dinos.size dinosaur(s)</h1>
+
+  <ul>
+    @dinos.map { dino =>
+    <li>
+      @dino.name
+      @helper.form(routes.Application.deleteDino(dino.id)) {
+        <input type="submit" name="deleteDino[@dino.id]" value="Delete" />
+      }
+    </li>
+    }
+  </ul>
+
+  <h2>Add a new species</h2>
+  @helper.form(routes.Application.newDino) {
+    @inputText(dinoForm("name"))
+    <input type="submit" name="addDino[]" value="Add" />
+  }
+}
