@@ -20,4 +20,10 @@ object Application extends Controller {
   def dinos = Action {
     Ok(views.html.index(Dino.all(), dinoForm))
   }
+
+  def deleteDino = Action {
+    Dino.delete
+    Ok(views.html.index(Dino.all(), dinoForm))
+  }
+
 }
