@@ -10,16 +10,16 @@ import helper._
     @dinos.map { dino =>
     <li>
       @dino.name
-      @helper.form(routes.Application.deleteDino(dino.id)) {
-        <input type="submit" name="deleteDino[@dino.id]" value="Delete" />
+      @helper.form(routes.Application.delete(dino.id)) {
+        <input type="submit" name="delete[@dino.id]" value="Delete" />
       }
     </li>
     }
   </ul>
 
   <h2>Add a new species</h2>
-  @helper.form(routes.Application.newDino) {
+  @helper.form(routes.Application.create) {
     @inputText(dinoForm("name"))
-    <input type="submit" name="addDino[]" value="Add" />
+    <input type="submit" name="create[]" value="Add" />
   }
 }

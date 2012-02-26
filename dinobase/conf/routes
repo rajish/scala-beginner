@@ -6,5 +6,16 @@
 GET     /                           controllers.Application.index
 GET     /dinos                      controllers.Application.dinos
 
+# Add a dino
+GET     /dinos/new                  controllers.Application.create
+POST    /dinos                      controllers.Application.save
+
+# Edit a dino
+GET     /dinos/:id                  controllers.Application.edit(id:Long)
+POST    /dinos/:id                  controllers.Application.update(id:Long)
+
+# Delete a dino
+POST     /dinos/:id/delete          controllers.Application.delete(id:Long)
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
