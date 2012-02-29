@@ -22,7 +22,7 @@ object ApplicationBuild extends Build {
           "controllers\\..*",
           "models\\..*",
           "views\\..*",
-          "play\\..*"
+          "play\\..api\\..*"
         )
       )
     )
