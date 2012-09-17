@@ -22,7 +22,13 @@ object ApplicationBuild extends Build {
           "controllers\\..*",
           "models\\..*",
           "views\\..*",
-          "play\\..*"
+          "play\\..*",
+          "play\\..api\\..*"
+        ),
+        key(":source-roots"), sexp(
+          "/home/rajish/proj/scala-beginner/dinobase/app",
+          "/home/rajish/proj/scala-beginner/dinobase/test",
+          "/home/rajish/bin/play2/framework/src"
         )
       )
     )
