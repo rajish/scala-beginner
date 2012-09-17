@@ -19,8 +19,10 @@ object ApplicationBuild extends Build {
       // Add your own project settings here
       ensimeConfig := sexp(
         key(":only-include-in-index"), sexp(
-          "app\\..*",
-          "dinobase\\..*"
+          "controllers\\..*",
+          "models\\..*",
+          "views\\..*",
+          "play\\..*"
         )
       )
     )

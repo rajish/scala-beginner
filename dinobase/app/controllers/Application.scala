@@ -1,18 +1,20 @@
 package controllers
 
+import models._
 import play.api._
-import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
-
-import models._
+import play.api.mvc._
 import views._
+
 
 object Application extends Controller {
 
   def index = Action {
+    val funval = "funval"
     Redirect(routes.Application.dinos)
   }
+  var somevar = Nil
 
   val dinoForm = Form (
     "name" -> nonEmptyText
